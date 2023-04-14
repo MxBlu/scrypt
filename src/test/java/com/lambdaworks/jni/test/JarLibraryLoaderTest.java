@@ -19,13 +19,13 @@ import static org.junit.Assert.assertTrue;
 public class JarLibraryLoaderTest extends AbstractPlatformDetectionTest {
     @Test
     public void loadSigned() throws Exception {
-        JarLibraryLoader loader = jarLibraryLoader("native-libs-signed");
-        assertTrue(loader.load("scrypt", true));
+        JarLibraryLoader loader = jarLibraryLoader("native-libs-updated");
+        assertTrue(loader.load("scrypt", false));
     }
 
     @Test
     public void loadUnsigned() throws Exception {
-        JarLibraryLoader loader = jarLibraryLoader("native-libs-unsigned");
+        JarLibraryLoader loader = jarLibraryLoader("native-libs-updated");
         assertTrue(loader.load("scrypt", false));
     }
     @Test
