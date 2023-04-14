@@ -25,7 +25,7 @@ public class SCrypt {
 
     static {
         LibraryLoader loader = LibraryLoaders.loader();
-        native_library_loaded = loader.load("scrypt", true);
+        native_library_loaded = loader.load("scrypt", false);
     }
 
     /**
