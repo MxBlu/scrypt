@@ -1,15 +1,18 @@
 CFLAGS := -std=c99 -Wall -O2
-SSE2   := yes
+# Set SSE2 to 'yes' if compiling for an arch that supports it (i.e. x86)
+SSE2   := 
 
 TARGET ?= $(shell uname -s 2>/dev/null || echo unknown)
 override TARGET := $(shell echo $(TARGET) | tr A-Z a-z)
 
-JAVA_HOME ?= $(realpath $(dir $(realpath $(shell which java)))../)
+# Do make a favour and just hard code your JVM home dir here
+JAVA_HOME := /Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home
 
 ifeq ($(TARGET), darwin)
 	DYLIB     := dylib
 	LDFLAGS	  := -dynamiclib -Wl,-undefined -Wl,dynamic_lookup -Wl,-single_module
-	CFLAGS    += -I $(JAVA_HOME)/Headers/
+#	The include paths below _should_ 
+	CFLAGS    += -I $(JAVA_HOME)/include -I $(JAVA_HOME)/include/$(TARGET)
 else
 	DYLIB     := so
 	LDFLAGS   := -shared
